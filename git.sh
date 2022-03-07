@@ -4,4 +4,4 @@ git add .
 git commit -m "$2"
 git status
 git push origin $1
-echo "Commited $2 to $1 successfully !"
+echo "\n\n${green}Commited $2 to $1 successfully !\n\n"
