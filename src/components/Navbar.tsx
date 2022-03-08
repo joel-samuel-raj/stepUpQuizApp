@@ -69,10 +69,11 @@ export default function Navbar () {
                         <p className="cursor-pointer text-sm text-red-800"> Forgot Password </p>
                         <p onClick={() => {setModal(false); setCreateModal(true)}} className="cursor-pointer text-sm text-blue-800"> Create Account </p>
                     </div>
-                    <Button color="secondary" variant="contained" className="block w-full mx-auto p-1"> <span> Login with Google </span> </Button>
+                    <Link href="http://localhost:3000/auth/google">
+                        <Button color="secondary" variant="contained" className="block w-full mx-auto p-1"> <span> Login with Google </span> </Button>
+                    </Link> 
                 </Box>
             </Modal>
-            
             <Modal className="flex justify-center items-center p-4" open={ createModal } onClose={ () => setModal( false ) }>
                 <Box className="relative bg-white py-12 px-16 rounded">
                     <IconButton className="p-2 w-6 h-6 cursor-pointer bg-red-500 hover:bg-red-600 rounded absolute top-2 right-2" onClick={ () => setCreateModal( false ) }>

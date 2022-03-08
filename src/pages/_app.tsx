@@ -1,7 +1,9 @@
-import { createTheme, ThemeProvider } from "@mui/material";
-import type { AppProps } from "next/app";
-import "../assets/styles/tailwind.css";
-const theme = createTheme({
+import { createTheme, ThemeProvider } from "@mui/material"
+import type { AppProps } from "next/app"
+import { UserProviders } from "../../context/UserContext"
+import "../assets/styles/tailwind.css"
+import { AppProvider } from "./appcontext"
+const theme = createTheme( {
   palette: {
     primary: {
       main: '#651cb1',
@@ -10,14 +12,16 @@ const theme = createTheme({
       main: '#c725c7',
     },
   },
-});
- 
-function MyApp({ Component, pageProps }: AppProps) {
+} )
+
+function MyApp ( { Component, pageProps }: AppProps ) {
   return (
-    <ThemeProvider theme={theme}>
-        <Component {...pageProps} />
-    </ThemeProvider>
-  );
+    <AppProvider>
+      <ThemeProvider theme={ theme }>
+        <Component { ...pageProps } />
+      </ThemeProvider>
+    </AppProvider>
+  )
 }
 
-export default MyApp;
+export default MyApp

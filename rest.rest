@@ -1,0 +1,12 @@
+POST http://localhost:3000/auth/local/signin
+Content-Type: application/json
+
+{
+    "name": "Joel",
+    "password": "Joel",
+    "email": "joel@example.com"
+}
+
+###
+ 
+GET http://localhost:3000/local/users
