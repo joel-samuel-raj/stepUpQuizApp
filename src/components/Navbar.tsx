@@ -11,8 +11,8 @@ export default function Navbar () {
     const [ createModal, setCreateModal ] = React.useState( false )
     return (
         <>
-            <Box sx={ { flexGrow: 1 } }>
-                <AppBar position="fixed">
+            <Box className="mb-20" sx={ { flexGrow: 1 } }>
+                <AppBar>
                     <Toolbar>
                         <IconButton
                             size="large"

@@ -8,13 +8,11 @@ import * as cors from 'cors';
  
 async function bootstrap() { 
   const app = await NestFactory.create( AppModule );
-  // app.use(cors({
-  //   methods:['GET','POST'],
-  //   credentials:
-  // }))
-  
-  app.use(cors())
-  
+  app.use(cors({
+    methods:['GET','POST'],
+    credentials: true,
+    origin : "http://localhost:5000"
+  }))
   app.use(session({
     store : MongoStore.create({ 
       mongoUrl : process.env.MONGODB_CONNECTION_URL,

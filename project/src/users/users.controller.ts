@@ -1,4 +1,4 @@
-import { Controller, Get, Req, Res } from '@nestjs/common';
+import { Controller, Get, Req, Res, Post } from '@nestjs/common';
 import { UsersService } from './users.service';
 
 @Controller('users')
@@ -7,12 +7,11 @@ export class UsersController {
   @Get()
     // @UseGuards(GoogleAuthGuard) 
     checkUser(@Req() req, @Res() res) {
-      console.log(req)
+      // console.log(req)
 
       if(req.user) {
         // console.log(req.user)
-        res.json( { userdata : req.user } )
-        console.log(req)
+        res.json(req.user)
       }
       else {
         res.json( { data: 'unauthenticated' } )
