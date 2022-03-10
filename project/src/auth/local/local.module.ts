@@ -1,13 +1,13 @@
-import { MailService } from './mail.service';
-import { UserSchema } from './../../users/modal';
-import { Module } from '@nestjs/common';
-import { LocalService } from './local.service';
-import { LocalController } from './local.controller';
+import { MailerModule } from '@nestjs-modules/mailer'
+import { Module } from '@nestjs/common'
 import { MongooseModule } from '@nestjs/mongoose'
 import { PassportModule } from '@nestjs/passport'
-import { LocalSerializer } from './serializer'
+import { UserSchema } from './../../users/modal'
+import { LocalController } from './local.controller'
+import { LocalService } from './local.service'
 import { LocalStrategy } from './local.stratergy'
-import { MailerModule } from '@nestjs-modules/mailer';
+import { MailService } from './mail.service'
+import { LocalSerializer } from './serializer'
 
 @Module( {
   imports : [

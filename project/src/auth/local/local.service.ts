@@ -1,9 +1,8 @@
-import { ObjectId } from 'mongoose';
-import { compare } from 'bcrypt';
-import { User } from './../../users/types/interface';
-import { Injectable } from '@nestjs/common';
-import { InjectModel } from '@nestjs/mongoose';
-import { Model } from 'mongoose';
+import { Injectable } from '@nestjs/common'
+import { InjectModel } from '@nestjs/mongoose'
+import { compare } from 'bcrypt'
+import { Model, ObjectId } from 'mongoose'
+import { User } from './../../users/types/interface'
 
 @Injectable()
 export class LocalService {

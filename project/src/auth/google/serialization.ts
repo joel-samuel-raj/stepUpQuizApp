@@ -1,7 +1,7 @@
-import { User } from './../../users/types/interface';
 import { Injectable } from "@nestjs/common";
 import { PassportSerializer } from '@nestjs/passport';
 import { ObjectId } from "mongoose";
+import { User } from './../../users/types/interface';
 import { GoogleService } from "./google.service";
 
 @Injectable()

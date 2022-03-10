@@ -1,5 +1,5 @@
 import { hash } from 'bcrypt';
-import { Controller, Get, Post, Req, Res, UseGuards } from '@nestjs/common';
+import { Controller, Get, Post, Req, Res, UseGuards, Session, Param } from '@nestjs/common';
 import { LocalService } from './local.service';
 import { Request, Response } from 'express';
 import { LoginGuard } from './gaurds'
@@ -14,7 +14,7 @@ export class LocalController {
     const user = {
       name: req.body.name,
       email: req.body.email,
-      password: hashedPassword,
+      password: hashedPassword, 
       profilePicture: req.body.profilePicture,
       rollNumber: req.body.rollNumber,
       phoneNumber: req.body.phoneNumber,
@@ -26,12 +26,18 @@ export class LocalController {
   }
   @Post( 'login' )
   @UseGuards(LoginGuard)
-  async login ( @Req() req, @Res() res: Response ): Promise<any> {
+  async login ( @Req() req, @Res() res: Response, @Session() session): Promise<any> {
+    console.log(session)
     res.send(req.user)
   }
-  @Get( 'reset' ) 
+  @Post( 'reset' ) 
   async reset ( @Req() req, @Res() res ) {
-    this.mailService.example()
-    res.send("wtf")
+    return this.mailService.generate(req.body.email)
+  }
+  @Get( 'reset/:email' ) 
+  async resetPassword ( @Req() req, @Res() res, @Param() params ) {
+    console.log(req)
+    res.send(req)
+    // res.send(this.mailService.reset(req.params['email']))
   }
 }

@@ -1,11 +1,11 @@
-import { UserSchema } from './../../users/modal';
-import { Module } from '@nestjs/common';
-import { GoogleService } from './google.service';
-import { GoogleController } from './google.controller';
-import { GoogleStrategy } from './google.stratergy';
-import { GoogleSerializer } from './serialization'
+import { Module } from '@nestjs/common'
 import { MongooseModule } from '@nestjs/mongoose'
 import { PassportModule } from '@nestjs/passport'
+import { UserSchema } from './../../users/modal'
+import { GoogleController } from './google.controller'
+import { GoogleService } from './google.service'
+import { GoogleStrategy } from './google.stratergy'
+import { GoogleSerializer } from './serialization'
 
 @Module( {
   imports : [

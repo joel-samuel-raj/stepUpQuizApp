@@ -5,5 +5,13 @@ module.exports = {
     GOOGLE_CLIENT_ID: process.env.GOOGLE_CLIENT_ID,
     REACT_APP_API_URL: process.env.REACT_APP_API_URL,
   },
-  "presets": ["next/babel"]
+  "presets": [ "next/babel" ],
+  async rewrites() {
+    return [
+      {
+        source: '/auth/local/login',
+        destination: 'http://localhost:3000/auth/local/login' // Proxy to Backend
+      }
+    ]
+  }
 };

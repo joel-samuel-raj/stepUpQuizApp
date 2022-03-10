@@ -40,9 +40,9 @@ export default function Navbar () {
     const createUser = async () => {
         await axios.post( "http://localhost:3000/auth/local/signin", newUser ).then( res => console.log( res ) )
     }
-
+ 
     const loginUser = async () => {
-        await axios.post( "http://localhost:3000/auth/local/login", user ).then( res => console.log( res ) )
+        await axios.post( "auth/local/login", user ).then( res => console.log( res ) )
     }
 
     return (

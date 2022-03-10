@@ -1,10 +1,10 @@
-import { User } from './../../users/types/interface';
-import { PassportStrategy } from '@nestjs/passport';
-import { Strategy, VerifyCallback } from 'passport-google-oauth20';
-import { config } from 'dotenv';
-import { Injectable } from '@nestjs/common';
-import { InjectModel } from '@nestjs/mongoose';
-import { Model } from 'mongoose';
+import { Injectable } from '@nestjs/common'
+import { InjectModel } from '@nestjs/mongoose'
+import { PassportStrategy } from '@nestjs/passport'
+import { config } from 'dotenv'
+import { Model } from 'mongoose'
+import { Strategy, VerifyCallback } from 'passport-google-oauth20'
+import { User } from './../../users/types/interface'
 
 config();
 
