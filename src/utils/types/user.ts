@@ -6,4 +6,4 @@ export class User {
     googleId?: ""
     rollNumber?: ""
     phoneNumber?: ""
-}
+}  

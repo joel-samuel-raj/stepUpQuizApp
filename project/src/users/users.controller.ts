@@ -5,7 +5,7 @@ import { UsersService } from './users.service';
 export class UsersController {
   constructor ( private readonly usersService: UsersService ) { }
   @Get()
-    // @UseGuards(GoogleAuthGuard) 
+    // @UseGuards(GoogleAuthGuard)  
     checkUser(@Req() req, @Res() res) {
       // console.log(req)
 

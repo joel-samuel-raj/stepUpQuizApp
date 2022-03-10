@@ -1,10 +1,12 @@
 const MongoStore = require( 'connect-mongo' )
+const flash = require( 'connect-flash' );
 
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import * as passport from 'passport';
 import * as session from 'express-session';
 import * as cors from 'cors';
+import * as cookieParser from 'cookie-parser'
  
 async function bootstrap() { 
   const app = await NestFactory.create( AppModule );
@@ -26,7 +28,9 @@ async function bootstrap() {
     httpOnly : false,
   }))
   app.use(passport.initialize())
-  app.use(passport.session())
+  app.use( passport.session() )
+  app.use( flash() )
+  app.use(cookieParser())
   await app.listen(3000);
 }
 bootstrap();

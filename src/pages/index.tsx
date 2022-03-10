@@ -13,7 +13,6 @@ const Home: NextPage = () => {
   return (
     <div>
       <Navbar />
-      <h1>{JSON.stringify(user)}</h1>
     </div>
   )
 }

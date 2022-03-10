@@ -36,7 +36,8 @@ export class GoogleStrategy extends PassportStrategy(Strategy, 'google') {
       googleId : id,
       name: displayName,
       email : emails[0].value,
-      profilePicture : photos[0].value
+      profilePicture: photos[ 0 ].value,
+      stratergy: "google"
     }
     return this.googleLogin(user).then((user) => { done(null, user) })
     // done(null, user);
