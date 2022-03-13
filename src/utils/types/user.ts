@@ -2,8 +2,11 @@ export class User {
     _id?: ""
     name?: ""
     email?: ""
-    profilePicture?: ""
+    profilePicture?: any
     googleId?: ""
     rollNumber?: ""
     phoneNumber?: ""
+    stratergy? : ""
+    password?: ""
+    isAdmin? : false
 }  

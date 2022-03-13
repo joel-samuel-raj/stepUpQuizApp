@@ -14,7 +14,7 @@ export class GoogleSerializer extends PassportSerializer {
     }
     async deserializeUser(id: ObjectId, done: Function) {
         return this.GoogleService.findById(id).then((user) => {
-            // console.log("deserialized from session :", user)
+            console.log("deserialized from session :", user)
             done(null, user)
         })
     }

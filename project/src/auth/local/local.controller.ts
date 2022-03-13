@@ -27,17 +27,16 @@ export class LocalController {
   @Post( 'login' )
   @UseGuards(LoginGuard)
   async login ( @Req() req, @Res() res: Response, @Session() session): Promise<any> {
-    console.log(session)
+    // console.log(session)
     res.send(req.user)
   }
   @Post( 'reset' ) 
   async reset ( @Req() req, @Res() res ) {
     return this.mailService.generate(req.body.email)
   }
-  @Get( 'reset/:email' ) 
-  async resetPassword ( @Req() req, @Res() res, @Param() params ) {
-    console.log(req)
-    res.send(req)
-    // res.send(this.mailService.reset(req.params['email']))
+  @Post( 'reset/:token' ) 
+  async resetPassword ( @Req() req, @Res() res) {
+    let password = await hash(req.body.password, 10)
+    return this.mailService.reset(req.params['token'], password)
   }
-}
+} 

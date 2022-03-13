@@ -19,9 +19,9 @@ Content-Type: application/json
 
 ###
 
-POST http://localhost:3000/auth/local/password-reset
+POST http://localhost:3000/auth/local/reset
 Content-Type: application/json
 
 {
-    "email": "joel.sr1024@gmail.com"
+    "email" : "joel.sr1024@gmail.com"
 }

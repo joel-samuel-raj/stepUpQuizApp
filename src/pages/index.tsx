@@ -12,7 +12,7 @@ const Home: NextPage = () => {
   const user: User= useContext( UserContext );
   return (
     <div>
-      <Navbar />
+      <Navbar /> 
     </div>
   )
 }

@@ -9,8 +9,8 @@ module.exports = {
   async rewrites() {
     return [
       {
-        source: '/auth/local/login',
-        destination: 'http://localhost:3000/auth/local/login' // Proxy to Backend
+        source: '/:prefix*/server/:path*',
+        destination: 'http://localhost:3000/:path*' // Proxy to Backend
       }
     ]
   }

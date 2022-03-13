@@ -1,20 +1,27 @@
 import { Controller, Get, Req, Res } from '@nestjs/common';
 import { UsersService } from './users.service';
 
-@Controller('users')
+@Controller()
 export class UsersController {
   constructor ( private readonly usersService: UsersService ) { }
-  @Get()
-    // @UseGuards(GoogleAuthGuard)  
-    checkUser(@Req() req, @Res() res) {
-      // console.log(req)
-
+  @Get("auth/:strategy/users")
+    checkLocalUser(@Req() req, @Res() res) {
       if(req.user) {
-        // console.log(req.user)
         res.json(req.user)
       }
       else {
-        res.json( { data: 'unauthenticated' } )
+        res.json({})
+      }
+  }
+  @Get("auth/:strategy/logout")
+    logoutGoogleUser(@Req() req, @Res() res) {
+      if(req.user) {
+        req.logout()
+        res.send("logged out")
+      }
+      else {
+        console.log(req.params)
+        res.send("unauthenticated")
       }
     }
 }
