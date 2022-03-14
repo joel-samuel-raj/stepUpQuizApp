@@ -2,47 +2,37 @@ import { faClose, faRedo } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { Box, Container, TextField, MenuItem } from '@mui/material'
 import React, { useReducer } from 'react'
-import Mcq from './answers/mcq'
+import Editor from "rich-markdown-editor"
 
 export default function Quiz () {
     const [ , forceUpdate ] = useReducer( x => x + 1, 0 )
 
-    const [ type, setType ] = React.useState( "" )
-    const [mcq, setMcq] = React.useState<any>([{}])
+    const [ content, setContent ] = React.useState<[ string ]>( [ "" ] )
+
     const handleChange = ( event: any ) => {
-        setType( event.target.value )
+        setContent( event )
+        console.log( content )
     }
 
-    const mcqData = async ( data: any ) => {
-        console.log("hello")
-        setMcq( data )
-        console.log( mcq )
-    }
-
-    console.log(mcq)
     return (
         <>
             <Container className="bg-purple_heart-100 p-4 ">
                 <div className="flex justify-between">
-                    <h4 className="mb-4"> Question 👇🏼 </h4>
+                    <h4> Question 👇🏼 </h4>
                     <div>
-                        <FontAwesomeIcon className="mx-1 text-xl cursor-pointer border-red-500 text-red-500" icon={faClose} />
-                        <FontAwesomeIcon className="mx-1 text-xl cursor-pointer border-red-500 text-green-500" icon={faRedo} />
+                        <FontAwesomeIcon className="mx-1 text-xl cursor-pointer border-red-500 text-red-500" icon={ faClose } />
+                        <FontAwesomeIcon className="mx-1 text-xl cursor-pointer border-red-500 text-green-500" icon={ faRedo } />
                     </div>
                 </div>
-                <TextField multiline fullWidth variant="standard" />
-                <div className="w-full flex justify-end p-4">
-                    <div className="bg-purple-200 rounded">
-                        <TextField value={ type } select sx={ { minWidth: 200 } } label="Type of Question" onChange={ handleChange }>
-                            <MenuItem value={ "Short Answer" }> Short Answer </MenuItem>
-                            <MenuItem value={ "MCQ" }> MCQ </MenuItem>
-                            <MenuItem value={ "Upload" }> Upload </MenuItem>
-                        </TextField>
+                <TextField InputProps={ {
+                    className : "text-xl"
+                } } multiline fullWidth variant="standard" />
+                { content.map( ( data: any, i ) => (
+                    <div key={ i } className="mt-4 bg-white py-4 px-8">
+                        <Editor defaultValue={ data } onChange={ ( value ) => { handleChange( value() ) } } placeholder="Start Writing Here..."
+                        />
                     </div>
-                </div>
-                <Box className="bg-purple_heart-200">
-                    <Mcq mcqData={mcqData}/>
-                </Box>
+                ) ) }
             </Container>
         </>
     )

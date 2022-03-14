@@ -19,9 +19,12 @@ Content-Type: application/json
 
 ###
 
-POST http://localhost:3000/auth/local/reset
+POST http://localhost:3000/posts/create
 Content-Type: application/json
 
 {
-    "email" : "joel.sr1024@gmail.com"
+    "questions" : ["hello", "world"]
 }
+
+###
+GET http://localhost:3000/posts/getPosts
