@@ -16,7 +16,7 @@ async function bootstrap() {
     origin : "http://localhost:5000"
   }))
   app.use("/auth/google", session({
-    name : "google_acc",
+    name : "google_acc", 
     store : MongoStore.create({ 
       mongoUrl : process.env.MONGODB_CONNECTION_URL,
       dbName: "example-db",

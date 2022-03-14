@@ -4,13 +4,14 @@ import { Alert, Button, Container, InputAdornment, Snackbar, TextField } from '@
 import axios from 'axios'
 import router, { Router } from 'next/router'
 import React, { useState, useReducer } from 'react'
+import { ulid } from 'ulid'
 
 export default function Create ({name}: any) {
     const [ , forceUpdate ] = useReducer( x => x + 1, 0 )
-    const [ questions, setQuestions ] = useState( [ "question #1" ] )
+    const [ questions, setQuestions ] = useState( [ {id : ulid(), questions : ["question #1"]} ] )
     const [ createModel, setCreateModel ] = useState( false )
     const addQuesion = ( i: number ) => {
-        setQuestions( ( prev ) => [ ...prev, `question #${ questions.length + 1 }` ] )
+        setQuestions( ( prev ) => [ ...prev, {id: ulid(), questions: [`question #${ questions.length + 1 }`]} ] )
     }
 
     const removeQuestion = ( i: number ) => {
@@ -24,7 +25,7 @@ export default function Create ({name}: any) {
     const handleChange = ( e: any, i: number ) => {
         let value = e.target.value
         let array = questions
-        array[ i ] = value
+        array[ i ].questions = value
         setQuestions( array )
     }
 
@@ -34,6 +35,7 @@ export default function Create ({name}: any) {
             setCreateModel( true )
             router.reload()
         } )
+        // console.log(questions)
     }
 
     return (

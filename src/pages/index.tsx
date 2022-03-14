@@ -17,21 +17,30 @@ type questionType = {
   questions?: Array<String>
 }
 
+type answerType = {
+  questionId?: String,
+  answers?: [string]
+}
+
 const Home: NextPage = () => {
   const user: User = useContext( UserContext )
   const [ data, setData ] = useState( [] )
-  const [answer, setAnswer] = useState<Array<Array<string>>>([[]])
+  const [answer, setAnswer] = useState<answerType[]>([{}])
   const [currentQuestion, setCurrentQuestion] = useState(0)
   const [ question, setQuestion ] = useState<questionType>( {} )
   useEffect( () => {
     axios.get( "/server/posts/getPosts" ).then( res => setData( res.data ) )
   }, [] )
 
-  const handleChange = (e: any, j: number) => {
-    const array: Array<string> = answer[ currentQuestion ]
-    array[j] = e
+  const handleChange = ( e: any, j: number, id: String | undefined ) => {
+    let obj: answerType = {
+      questionId: id,
+      answers: [""]
+    }
+    obj.answers![ j ] = e
+    let array: answerType[] = [ ...answer, obj ]
     setAnswer(array)
-    console.log(array)
+    console.log(answer)
   }
 
   return (
@@ -52,7 +61,7 @@ const Home: NextPage = () => {
         { question.questions!.map( ( quest: String, j: number ) => ( <div key={ j } className="p-4">
           <p className="text-lg"> { quest } </p>
           <div className="my-4">
-            <Editor defaultValue={answer[currentQuestion][j]} onChange={ ( value ) => { handleChange( value(), j ) } } className="bg-black" placeholder="Start Writing Here..."
+            <Editor onChange={ ( value ) => { handleChange( value(), j, question._id ) } } className="bg-black" placeholder="Start Writing Here..."
             />
           </div>
         </div> 
