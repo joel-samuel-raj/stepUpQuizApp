@@ -36,4 +36,14 @@ export class PostsController {
       res.send('success');
     });
   }
+  @Get('/answers/get')
+  async getAnswers(@Req() req, @Res() res) {
+    await this.postsService.getAnswers().then((data) => {
+      res.json(data);
+    });
+  }
+  @Post('/answers/validate/:id')
+  async validateAnswers ( @Req() req, @Res() res ) {
+    await this.postsService.validateAnswers(req.params.id, req.body).then(() => res.send("success"))
+  }
 }

@@ -7,7 +7,14 @@ export const postsSchema = new mongoose.Schema({
 });
 
 export const answersSchema = new mongoose.Schema( {
+  userName: String,
   userId: mongoose.Schema.Types.ObjectId,
   questionId: mongoose.Schema.Types.ObjectId,
-  answers: [String]
+  answers: [ String ],
+  validate: { 
+    type: Boolean,
+    default: false
+  }, 
+  userEmail: String,
+  userPhone: Number
 })

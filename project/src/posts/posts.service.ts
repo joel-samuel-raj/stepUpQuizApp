@@ -38,4 +38,10 @@ export class PostsService {
         console.log("here")
         return await new this.AnswerModel(obj).save();
     }
+    async getAnswers () {
+        return await this.AnswerModel.find({})
+    }
+    async validateAnswers ( id, obj ) {
+        return await this.AnswerModel.findByIdAndUpdate(id, obj)
+    }
 }
