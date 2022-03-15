@@ -6,7 +6,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "app": "concurrently \"npm run dev\" \"cd project && npm run start:dev\""
+    "app": "concurrently \"npm run dev\" \"cd project && npm run start:dev\"",
+    "server": "cd project && npm run app"
   },
   "dependencies": {
     "@emotion/react": "^11.6.0",
