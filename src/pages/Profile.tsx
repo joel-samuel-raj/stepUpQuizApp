@@ -6,7 +6,7 @@ import Questions from '../components/Postman/Questions'
 
 const Profile = () => {
 
-    const user = useContext(UserContext);
+  const user = useContext(UserContext);
   const admin = () => {
     if ( user.isAdmin! ) {
         return <Questions />

@@ -1,18 +1,21 @@
-import { faArrowRight, faClose } from '@fortawesome/free-solid-svg-icons'
+import { faArrowRight, faClose, faPencil } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { Box, Button, Container, IconButton, Modal, TextField, Typography } from '@mui/material'
 import axios from 'axios'
 import router from 'next/router'
 import React, { useEffect, useState } from 'react'
 import Create from './Create'
+import Update from './Update'
 
 export default function Questions () {
   const [ model, setModel ] = useState( false )
   const [ name, setName ] = useState( "" )
   const [ questionsModal, setQuestionsModal ] = useState( false )
   const [ confirmModal, setConfirmModal ] = useState( false )
+  const [ editModal, setEditModal ] = useState( false )
   const [ id, setId ] = useState<string[]>( [] )
   const [ data, setData ] = useState<any>( [ { name: "" } ] )
+  const [ update, setUpdate ] = useState( "" )
 
   useEffect( () => {
     axios.get( "/server/posts/getPosts" ).then( ( response ) => {
@@ -39,6 +42,11 @@ export default function Questions () {
                 setId( ( arr ) => [ ...arr, dat._id ] )
               } }>
                 <FontAwesomeIcon className="text-white text-lg" icon={ faClose }></FontAwesomeIcon>
+              </IconButton>
+              <IconButton className="p-2 w-6 h-6 cursor-pointer bg-green-500 hover:bg-green-600 rounded absolute top-2 right-10" onClick={ () => {
+                setEditModal( true ); setUpdate(dat._id as string)
+              } }>
+                <FontAwesomeIcon className="text-white text-lg" icon={ faPencil }></FontAwesomeIcon>
               </IconButton>
             </Box>
           ) ) }
@@ -68,6 +76,14 @@ export default function Questions () {
             <FontAwesomeIcon className="text-white text-lg" icon={ faClose }></FontAwesomeIcon>
           </IconButton>
           <Create name={ name } />
+        </Box>
+      </Modal>
+      
+      <Modal className="flex justify-center items-center"
+        open={ editModal }
+        onClose={ () => { setEditModal( false ) } }>
+        <Box className="bg-white px-16 py-8 rounded relative flex justify-center items-center flex-col">
+              <Create id={update}/>
         </Box>
       </Modal>
 
