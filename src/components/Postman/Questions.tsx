@@ -97,11 +97,11 @@ export default function Questions () {
       <Container className="mt-4">
         { currentAnswers.length > 0 && <Box>
           { currentAnswers.map( ( ans, j ) => ( <div key={ j } className="py-4"> <Accordion className="bg-purple_heart-50">
-            <AccordionSummary className="bg-purple_heart-300 rounded text-purple-900" expandIcon={ <FontAwesomeIcon icon={ faChevronDown }></FontAwesomeIcon> }> { ans.userName } </AccordionSummary>
+            <AccordionSummary className="bg-purple_heart-500 text-lg font-bold text-white rounded" expandIcon={ <FontAwesomeIcon className="text-secondary" icon={ faChevronDown }></FontAwesomeIcon> }> { ans.userName } </AccordionSummary>
             <AccordionDetails> <Box>
               { handleQuestion( ans.questionId ).questions.map( ( quest: any, k: number ) => ( <div key={ k }>
                 <p className="font-bold mt-8"> { quest } </p>
-                <div className="p-2 px-4 mt-4 bg-white rounded">
+                <div className="p-2 mt-4 bg-white rounded">
                   <Editor readOnly={ true } value={ ans.answers![ k ] }> </Editor>
                 </div>
                 <Divider></Divider>
@@ -111,15 +111,15 @@ export default function Questions () {
         </Box> }
       </Container>
 
-      <Container>
+      <Container className="mb-4">
         { currentAnswers.length > 0 && <Box>
           <Divider className="bg-purple_heart-500 rounded-full my-4"></Divider>
           <h3 className="my-4"> Potential Winners ⚡ </h3>
           { currentAnswers.map( ( ans, j ) => ( <div key={ j }>{
-            ans.validate && <Box className="bg-purple_heart-100 rounded p-2">
-              <h4 className=""> { ans.userName } </h4>
-              <p onClick={() => window.location.href=`mailto:${ans.userEmail}?body=You have potential to win !`} className="text-blue-500 cursor-pointer hover:underline"> { ans.userEmail } </p>
-              <p onClick={() => window.location.href=`tel:${ans.userPhone}`} className="text-blue-500 cursor-pointer hover:underline"> { ans.userPhone } </p>
+            ans.validate && <Box className="bg-purple_heart-100 rounded p-4">
+              <h4 className=""> { "👉🏼" + ans.userName } </h4>
+              <p onClick={() => window.location.href=`mailto:${ans.userEmail}?body=You have potential to win !`} className="text-blue-500 cursor-pointer hover:underline"> { "✉️ " + " " + ans.userEmail } </p>
+              <p onClick={() => window.location.href=`tel:${ ans.userPhone}`} className="text-blue-500 cursor-pointer hover:underline"> {"📞 " + " " + ans.userPhone } </p>
             </Box>
           }
           </div> ) )
@@ -155,7 +155,7 @@ export default function Questions () {
       <Modal className="flex justify-center items-center"
         open={ editModal }
         onClose={ () => { setEditModal( false ) } }>
-        <Box className="bg-white px-16 py-8 rounded relative flex justify-center items-center flex-col">
+        <Box className="bg-white  px-16 py-8 rounded relative flex justify-center items-center flex-col">
           <Create id={ update } />
         </Box>
       </Modal>

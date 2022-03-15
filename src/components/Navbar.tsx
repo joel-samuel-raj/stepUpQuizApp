@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { AppBar, Box, Button, Drawer, IconButton, InputAdornment, List, ListItem, ListItemIcon, ListItemText, Modal, TextField, Toolbar, Typography } from '@mui/material'
+import { Alert, AppBar, Box, Button, Drawer, IconButton, InputAdornment, List, ListItem, ListItemIcon, ListItemText, Modal, Snackbar, TextField, Toolbar, Typography } from '@mui/material'
 import MenuIcon from '@mui/icons-material/Menu'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faUser, faClose, faLock, faEnvelope, faAddressBook, faPhone } from '@fortawesome/free-solid-svg-icons'
@@ -17,6 +17,7 @@ export default function Navbar ({loginModel}: {loginModel?: boolean}) {
 
     const [ drawer, setDrawer ] = React.useState( false )
     const [ modal, setModal ] = React.useState( false )
+    const [ required, setRequired ] = React.useState( false )
     const [ createModal, setCreateModal ] = React.useState( false )
     const [ forgotPassword, setForgotPassword ] = React.useState( false )
 
@@ -68,14 +69,26 @@ export default function Navbar ({loginModel}: {loginModel?: boolean}) {
     }
 
     const createUser = async () => {
+        if ( !( Object.keys( newUser ).length === 5 ) ) {
+            setRequired(true)
+            return
+        }
         await axios.post( "server/auth/local/signin", newUser ).then( () => router.reload() )
     }
 
     const loginUser = async () => {
+        if ( !( user.email && user.password ) ) {
+            setRequired(true)
+            return
+        }
         await axios.post( "/server/auth/local/login", user ).then( () => router.reload() )
     }
 
     const resetPassword = async () => {
+        if ( Object.keys(email).length === 0 ) {
+            setRequired( true )
+            return
+        }
         await axios.post( "server/auth/local/reset", email ).then( res => console.log( res ) )
     }
 
@@ -148,13 +161,13 @@ export default function Navbar ({loginModel}: {loginModel?: boolean}) {
                                 </InputAdornment>
                             ),
                         } } label="Name" required type="text" variant="outlined" />
-                        <TextField color="primary" onBlur={ onClickHandler } name="rollNumber" className="w-full my-4" InputProps={ {
+                        {/* <TextField color="primary" onBlur={ onClickHandler } name="rollNumber" className="w-full my-4" InputProps={ {
                             startAdornment: (
                                 <InputAdornment position="start">
                                     <FontAwesomeIcon icon={ faAddressBook }></FontAwesomeIcon>
                                 </InputAdornment>
                             ),
-                        } } label="Roll Number" required type="text" variant="outlined" />
+                        } } label="Roll Number" required type="text" variant="outlined" /> */}
                         <TextField color="primary" onBlur={ onClickHandler } name="phoneNumber" className="w-full my-4" InputProps={ {
                             startAdornment: (
                                 <InputAdornment position="start">
@@ -246,7 +259,11 @@ export default function Navbar ({loginModel}: {loginModel?: boolean}) {
                     </List>
                 </Drawer>
             </Box>
-            {/* { () => { return currentUser === "unauthenticated" ? login() : logout() } } */ }
+            <Snackbar open={required} autoHideDuration={6000} onClose={() => {setRequired(false)}}>
+                <Alert onClose={() => {setRequired(false)}} severity="error">
+                    Please Fill All The Fields 
+                </Alert>
+            </Snackbar>
         </>
     )
 }
